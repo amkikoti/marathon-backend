@@ -4,6 +4,7 @@ import com.kikoti.erbmarathon.dtos.MarathonCategoryDto;
 import com.kikoti.erbmarathon.entity.MarathonCategory;
 import com.kikoti.erbmarathon.repository.MarathonCategoryRepository;
 import com.kikoti.erbmarathon.utils.ResponseWrapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -14,13 +15,10 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class MarathonCategoryServiceImpl implements MarathonCategoryService {
 
     private final MarathonCategoryRepository marathonCategoryRepository;
-
-    public MarathonCategoryServiceImpl(MarathonCategoryRepository marathonCategoryRepository) {
-        this.marathonCategoryRepository = marathonCategoryRepository;
-    }
 
     @Override
     public ResponseEntity<ResponseWrapper<MarathonCategory>> saveMarathonCategory(MarathonCategoryDto request) {
