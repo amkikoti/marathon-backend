@@ -1,35 +1,33 @@
 package com.kikoti.erbmarathon.dtos;
 
-import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class MarathonDto {
     private Long id;
-
-    @NotBlank(message = "Name is required")
-    private String name;
-
-    @NotBlank(message = "Location is required")
-    private String location;
-
+    @NotNull(message = "Title is required")
+    private String marathonTitle;
+    @NotNull(message = "Description is required")
+    private String marathonDescription;
     @NotNull(message = "Date is required")
-    private LocalDate date;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate marathonStartDate;
     @NotNull(message = "Time is required")
-    private LocalTime time;
+    private LocalTime marathonStartTime;
+    @NotNull(message = "Country is required")
+    private String marathonCountry;
+    @NotNull(message = "Region is required")
+    private String marathonRegion;
+    @NotNull(message = "Year is required")
+    private String marathonYear;
 
-    private String description;
-
-    @NotNull(message = "Max participants is required")
-    private int maxParticipants;
-
-    private boolean isActive = true; //hii ni default value
-
-    @NotNull(message = "Registration fee is required")
-    private double registrationFee;
+    private List<Long> categories;
 }

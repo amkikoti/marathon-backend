@@ -27,5 +27,4 @@ public class MarathonRegistration {
     @CreationTimestamp
     private LocalDateTime registrationDate;
 
-
 }

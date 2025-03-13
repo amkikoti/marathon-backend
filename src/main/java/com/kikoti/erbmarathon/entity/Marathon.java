@@ -1,51 +1,37 @@
 package com.kikoti.erbmarathon.entity;
 
-import com.kikoti.erbmarathon.dtos.MarathonDto;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "marathons")
 public class Marathon {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
+    private String marathonTitle;
+    private String marathonDescription;
+    private LocalDate marathonStartDate;
+    private LocalTime marathonStartTime;
+    private String marathonCountry;
+    private String marathonRegion;
+    private String marathonYear;
 
-    private String name;
-    private String location;
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    private int maxParticipants;
-    private boolean isActive;
-    private double registrationFee;
+    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    private List<MarathonCategory> categories;
 
-    @CreationTimestamp
-    private LocalDateTime dateCreated;
-
-    @UpdateTimestamp
-    private LocalDateTime dateUpdated;
-
-
-    public MarathonDto getMarathonDto() {
-        MarathonDto marathonDto = new MarathonDto();
-        marathonDto.setId(id);
-        marathonDto.setName(name);
-        marathonDto.setLocation(location);
-        marathonDto.setDate(date);
-        marathonDto.setTime(time);
-        marathonDto.setDescription(description);
-        marathonDto.setMaxParticipants(maxParticipants);
-        marathonDto.setActive(isActive);
-        marathonDto.setRegistrationFee(registrationFee);
-        return marathonDto;
+    public void addCategory(MarathonCategory category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        categories.add(category);
     }
 
 }
