@@ -20,7 +20,7 @@ public class MarathonRegistration {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private UserPrincipal user;
 
     private String emergencyContact;
 

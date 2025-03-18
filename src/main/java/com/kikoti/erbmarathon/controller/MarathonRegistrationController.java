@@ -2,7 +2,7 @@ package com.kikoti.erbmarathon.controller;
 
 import com.kikoti.erbmarathon.dtos.MarathonRegistrationDto;
 import com.kikoti.erbmarathon.entity.MarathonRegistration;
-import com.kikoti.erbmarathon.services.participant.MarathonRegistrationService;
+import com.kikoti.erbmarathon.services.marathon.MarathonRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

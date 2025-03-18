@@ -1,11 +1,11 @@
-package com.kikoti.erbmarathon.services.participant;
+package com.kikoti.erbmarathon.services.marathon;
 
 import com.kikoti.erbmarathon.dtos.MarathonRegistrationDto;
 import com.kikoti.erbmarathon.entity.*;
 import com.kikoti.erbmarathon.exception.*;
 import com.kikoti.erbmarathon.repository.MarathonRegistrationRepository;
 import com.kikoti.erbmarathon.repository.MarathonRepository;
-import com.kikoti.erbmarathon.services.jwt.UserService;
+import com.kikoti.erbmarathon.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,7 @@ public class MarathonRegistrationServiceImpl implements MarathonRegistrationServ
             throw new RegistrationClosedException("Marathon registration is closed");
         }
 
-        Users currentUser = userService.getCurrentUser();
+        UserPrincipal currentUser = userService.getCurrentUser();
 
         if (registrationRepository.existsByMarathonAndUser(marathon, currentUser)) {
             throw new DuplicateRegistrationException("User already registered for this marathon");
@@ -52,7 +52,7 @@ public class MarathonRegistrationServiceImpl implements MarathonRegistrationServ
         Marathon marathon = marathonRepository.findById(marathonId)
                 .orElseThrow(() -> new MarathonNotFoundException("Marathon not found"));
 
-        Users currentUser = userService.getCurrentUser();
+        UserPrincipal currentUser = userService.getCurrentUser();
 
         return registrationRepository.findByMarathonAndUser(marathon, currentUser)
                 .orElseThrow(() -> new RegistrationNotFoundException("Registration not found"));

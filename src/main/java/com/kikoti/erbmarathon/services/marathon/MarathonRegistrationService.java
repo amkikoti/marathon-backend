@@ -1,4 +1,4 @@
-package com.kikoti.erbmarathon.services.participant;
+package com.kikoti.erbmarathon.services.marathon;
 
 
 import com.kikoti.erbmarathon.dtos.MarathonRegistrationDto;
