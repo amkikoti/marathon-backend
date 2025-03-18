@@ -25,10 +25,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(
-                                "/api/v1/auth/change-password",
-                                "/api/v1/auth/change-user-status"
+                                "/api/auth/change-password",
+                                "/api/auth/change-user-status"
                         ).authenticated()
                         .anyRequest().authenticated()
                 )
