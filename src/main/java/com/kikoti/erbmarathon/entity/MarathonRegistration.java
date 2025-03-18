@@ -1,30 +1,59 @@
 package com.kikoti.erbmarathon.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kikoti.erbmarathon.entity.user.User;
+import com.kikoti.erbmarathon.enums.EntryType;
+import com.kikoti.erbmarathon.enums.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "marathon_registrations")
+@Table(name = "marathon_registration")
 public class MarathonRegistration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String registrationDate;
+    private String registrationNumber;
+    private String registrationSize;
+    private String registrationPhoneNumber;
+    private String registrationIdNumber;
+    private String registrationPassportNumber;
+    private String registrationEmergencyContact;
+    private String registrationEmergencyNumber;
+    private String registrationAddress;
+    private String registrationCountry;
+    private Long registrationAge;
 
-    @ManyToOne
-    @JoinColumn(name = "marathon_id", nullable = false)
-    private Marathon marathon;
+    @Enumerated(EnumType.STRING)
+    private Gender registrationGender;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserPrincipal user;
+    @Enumerated(EnumType.STRING)
+    private EntryType registrationEntry;
 
-    private String emergencyContact;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private MarathonPayment registrationPayment;
 
-    @CreationTimestamp
-    private LocalDateTime registrationDate;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private User registeredUser;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "marathon_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Marathon registrationMarathon;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "marathon_category_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private MarathonCategory registrationCategory;
 
 }

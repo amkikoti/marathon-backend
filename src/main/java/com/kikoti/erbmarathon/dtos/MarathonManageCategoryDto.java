@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class MarathonManageCategoryDto {
 
-    @NotNull(message = "Event id is required")
+    @NotNull(message = "Marathon id is required")
     private Long marathon;
     @NotEmpty(message = "List of categories cannot be empty")
     private List<Long> categories;
