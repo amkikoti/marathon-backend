@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtConfig {
 
-    @Value("${jwt_secret}")
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt_prefix}")
+    @Value("${jwt.prefix}")
     private String prefix;
 
-    @Value("${jwt_header}")
+    @Value("${jwt.header}")
     private String header;
 
-    @Value("${jwt_expiration_time}")
+    @Value("${jwt.expiration.time}")
     private String jwt_expiration_time;
 
-    @Value("${api_base_url}")
+    @Value("${api.base.url}")
     private String baseUrl;
 }
